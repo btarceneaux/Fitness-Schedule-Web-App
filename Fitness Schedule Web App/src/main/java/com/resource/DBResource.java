@@ -15,6 +15,8 @@ public class DBResource
 		
 		try 
 		{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
 		    connection = DriverManager.getConnection(url, username, password);
 			System.out.println("Connection created.");
 		} 

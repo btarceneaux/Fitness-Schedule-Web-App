@@ -9,20 +9,20 @@ nav
     background-color: steelblue;  
     display: flex;
     justify-content: space-evenly;
+    font-size: large;
 }
 
 nav a
 {
     color: white;
-    
-    font-size: large;
+    /* font-size: large; */
     text-decoration: none;
 }
 
 nav a:hover
 {
-    color: white;
     font-weight: bold;
+    /* background-color:white; */
 }
 
 #p1
@@ -75,3 +75,4 @@ nav a:hover
     font-size: large;
     width: 100px;
 }
+

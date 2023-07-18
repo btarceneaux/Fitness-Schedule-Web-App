@@ -1,7 +1,6 @@
 package com.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Time;
@@ -24,8 +23,6 @@ public class BatchDao
 		try
 		{	
 			Connection connection = DBResource.createConnection();		
-			connection = DriverManager.getConnection(url, username, password);
-			
 			String sql = "SELECT "
 					+    "batch_id "
 					+    "batch_day "
@@ -63,7 +60,6 @@ public class BatchDao
 		try
 		{
 			Connection connection = DBResource.createConnection();	
-			connection = DriverManager.getConnection(url, username, password);
 			System.out.println("Connection created.");
 			
 			String sql = 
@@ -107,7 +103,6 @@ public class BatchDao
 		try
 		{	
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
 			System.out.println("Connection created.");
 			
 			PreparedStatement psmt = connection.prepareStatement(
@@ -149,7 +144,6 @@ public class BatchDao
 		try
 		{	
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
 			System.out.println("Connection created.");
 			
 			String day = batch.getBatchDay().toString();
@@ -185,7 +179,6 @@ public class BatchDao
 		try
 		{	
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
 			System.out.println("Connection created.");
 			
 			String sql = "UPDATE batch SET "
@@ -220,7 +213,6 @@ public class BatchDao
 		try
 		{	
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
 			System.out.println("Connection created.");
 			
 			String sql = "DELETE FROM batch WHERE batch_id = ?";

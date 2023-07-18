@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.Time;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import com.service.BatchService;
 import com.bean.Batch;
@@ -32,12 +33,22 @@ public class BatchController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		HttpSession hs = request.getSession();
+//		response.setContentType("text/html");
+//		HttpSession hs = request.getSession();
 		
-		List<Batch> batchList = batchService.getAllBatches();
-		hs.setAttribute("batchList",batchList);
-		response.sendRedirect("batches.jsp");
+		List<Batch> batchList = new ArrayList<Batch>();
+		batchList = batchService.getAllBatches();
+		
+		request.setAttribute("batchList", batchList);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("batches.jsp");
+		dispatcher.forward(request, response);
+		
+//		hs.setAttribute("batchList",batchList);
+		
+//		response.sendRedirect("batches.jsp");
+
+		
 	}
 
 	/**
@@ -72,7 +83,7 @@ public class BatchController extends HttpServlet {
 		
 		int result = batchService.createBatch(myBatch);
 		
-		RequestDispatcher rdUser = request.getRequestDispatcher("batches.jsp");
+		RequestDispatcher rdUser = request.getRequestDispatcher("createBatch.html");
 		
 		if(result == 1)
 		{
