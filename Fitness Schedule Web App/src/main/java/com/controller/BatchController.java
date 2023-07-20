@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.service.BatchService;
 import com.bean.Batch;
+import com.dao.BatchDao;
 
 /**
  * Servlet implementation class BatchController
@@ -33,22 +34,29 @@ public class BatchController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.setContentType("text/html");
-//		HttpSession hs = request.getSession();
 		
-		List<Batch> batchList = new ArrayList<Batch>();
-		batchList = batchService.getAllBatches();
+		String action = request.getServletPath();
+		int id = Integer.parseInt(request.getParameter("id"));
 		
-		request.setAttribute("batchList", batchList);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("batches.jsp");
-		dispatcher.forward(request, response);
-		
-//		hs.setAttribute("batchList",batchList);
-		
-//		response.sendRedirect("batches.jsp");
-
-		
+		switch (action)
+		{
+		case "/deleteBatch":
+			RequestDispatcher rdBatch = request.getRequestDispatcher("batches.jsp");
+			
+			//Get the batch that needs to be deleted.
+			int result = batchService.deleteBatch(id);
+			rdBatch.forward(request, response);
+			
+			break;
+		case "/updateBatch":
+			HttpSession session = request.getSession();
+			session.setAttribute("batchId", id);
+			
+			RequestDispatcher udBatch = request.getRequestDispatcher("updateBatch.jsp");
+			udBatch.forward(request, response);
+		default:
+			break;
+		}	
 	}
 
 	/**
@@ -58,13 +66,10 @@ public class BatchController extends HttpServlet {
 		response.setContentType("text/html");
 		String day = request.getParameter("day");
 		String time = request.getParameter("time");
-		
-		PrintWriter pw = response.getWriter();
-		
+		String action = request.getServletPath();
 		int hour = 0;
-		
-		System.out.println(day);
-		System.out.println(time);
+		Time scheduleTime = new Time(hour, 0, 0);
+		PrintWriter pw = response.getWriter();
 		
 		String[] stringarray = time.split(":");
 		if(stringarray[1].equals("00am") || (stringarray[0].equals("12") && stringarray[1].equals("00pm")))
@@ -76,24 +81,55 @@ public class BatchController extends HttpServlet {
 			hour = Integer.parseInt(stringarray[0]) + 12;
 		}
 		
-		Time scheduleTime = new Time(hour, 0, 0);
-		Batch myBatch = new Batch();
-		myBatch.setBatchDay(day);
-		myBatch.setBatchTime(scheduleTime);
-		
-		int result = batchService.createBatch(myBatch);
-		
-		RequestDispatcher rdUser = request.getRequestDispatcher("createBatch.html");
-		
-		if(result == 1)
+		switch (action)
 		{
-			pw.println("The batch was successfully created");
-		}
-		else
-		{
-			pw.println("The batch was not created. Please try again.");
-		}
-		rdUser.include(request, response);
+		case "updateExistingBatch":
+			String batchId = request.getParameter("id");
+			int myBatchId = Integer.parseInt(batchId);
+			
+			Batch updatedBatch = new Batch();
+			updatedBatch.setBatchDay(day);
+			updatedBatch.setBatchTime(scheduleTime);
+			updatedBatch.setBatchId(myBatchId);
+			
+            int updateResult = batchService.updateBatch(updatedBatch);
+			
+			if(updateResult == 1)
+			{
+				System.out.println("The batch was successfully created");
+			}
+			else
+			{
+				System.out.println("The batch was not created");
+			}
+			
+			RequestDispatcher upeBatch = request.getRequestDispatcher("batches.jsp");
+			upeBatch.forward(request, response);
+			
+			break;
+		default:
+			Batch myBatch = new Batch();
+			myBatch.setBatchDay(day);
+			myBatch.setBatchTime(scheduleTime);
+			
+			int result = batchService.createBatch(myBatch);
+			
+			RequestDispatcher rdUser = request.getRequestDispatcher("index.html");
+			
+			if(result == 1)
+			{
+				pw.println("The batch was successfully created");
+			}
+			else
+			{
+				pw.println("The batch was not created. Please try again.");
+			}
+			
+//			rdUser.include(request, response);
+			response.sendRedirect("index.html");
+			
+			break;
+		}		
 	}
 
 	/**

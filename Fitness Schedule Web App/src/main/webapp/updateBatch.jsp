@@ -1,29 +1,24 @@
+<%@page import="com.bean.Batch"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
-    <link rel="stylesheet" href="css/main.css">
+<meta charset="UTF-8">
+<title>Update Batch</title>
 </head>
 <body>
-    <div>
-        <nav>
-            <ul><a href="index.html">Home</a></ul>
-            <ul><a href="addBatch.html">Add Batch</a></ul>
-            <ul><a href="addParticipant.html">Add Participant</a></ul>
-            <ul><a href="updateBatch.html">Update Batch</a></ul>
-            <ul><a href="updateParticipant.html">Update Participant</a></ul>
-            <ul><a href="batches.jsp">View Batches</a></ul>
-            <ul><a href="participants.jsp">View Participants</a></ul>
-            <ul><a href="batchParticipants.jsp">View Batch Participants</a></ul>
-        </nav>
-    </div>
-    
-    <h2>Add Batch</h2>
+    <%
+        Object obj = session.getAttribute("batchId"); 
+        int myBatchId = (int)obj;
+        request.setAttribute("myBatchId", myBatchId);
+    %>
+    <h2>Update Batch</h2>
     <div class="add">
-        <form action="BatchController" method="post">
+        <form action="updateExistingBatch" method="post">
+            <b>Batch ID</b><br>
+            <input type="text" value="<c:out value='${myBatchId}'/>" readonly><br>
              <b>Please Select A Day : </b>
             <select name="day" id="day">
                 <option value="Sunday" class="optionDay">Sunday</option>
@@ -52,7 +47,5 @@
             <input type="submit" id="add-submit">
         </form>
     </div>
-
-    
 </body>
 </html>

@@ -21,9 +21,9 @@ public class BatchService
 		return result;
 	}
 	
-	public int deleteBatch(Batch batch)
+	public int deleteBatch(int batchId)
 	{
-		int result = dao.deleteBatch(batch.getBatchId());
+		int result = dao.deleteBatch(batchId);
 		
 		return result;
 	}

@@ -47,6 +47,53 @@ nav a:hover
     margin: auto;
 }
 
+.addParticipant
+{
+    padding: 5px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-radius: 5px;
+    font-size: large;
+    font-weight: bold;
+    text-align:justify;
+    opacity: 95%;
+    width: 400px;
+    height:240px;
+    background-color: steelblue;
+    margin: auto;
+}
+
+.addParticipant label
+{
+    padding-left: 15px;
+    color: white;
+    padding-bottom: 5px;
+    display: inline-block;
+    width: 100px;
+}
+
+.addParticipant input
+{
+    height: 25px;
+    width: 250px;
+    font-size: large;
+    color:darkcyan;
+}
+
+.addParticipant button
+{
+    width: 75px;
+    height: 40px;
+    font-size: large;
+    color:slategray;
+    margin : 0 auto;
+}
+
+#buttonContainer
+{
+    text-align: center;
+}
+
 .add b
 {
     padding-left: 15px;
@@ -76,3 +123,25 @@ nav a:hover
     width: 100px;
 }
 
+table
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    color: darkcyan;
+    text-align: center;
+}
+
+table th
+{
+    background-color: steelblue;
+    color:white;
+    border-color: steelblue;
+    font-size: large;
+    font-weight: bold;
+}
+
+table td
+{
+    font-weight: bold;
+}

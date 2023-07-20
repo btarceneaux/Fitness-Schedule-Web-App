@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Add Participant</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -15,11 +15,28 @@
             <ul><a href="addParticipant.html">Add Participant</a></ul>
             <ul><a href="updateBatch.html">Update Batch</a></ul>
             <ul><a href="updateParticipant.html">Update Participant</a></ul>
+            <ul><a href="batches.jsp">View Batches</a></ul>
+            <ul><a href="participants.jsp">View Participants</a></ul>
+            <ul><a href="batchParticipants.jsp">View Batch Participants</a></ul>
         </nav>
     </div>
-    
-    <h2>Welcome To The Fitness Schedule Web Application</h2>
-    <p id="p1">Please select an action to perform from the menu.</p>
+    <br><br>
+    <h2>Add Participant</h2>
+    <div class="addParticipant">
+        <form action="addParticipant" method="post">
+            <label>First Name  : </label>
+            <input type="text" name="firstName"><br><br>
+            <label>Last Name  : </label>
+            <input type="text" name="lastName"><br><br>
+            <label>Email : </label>
+            <input type="text" name="emailAddress"><br><br>
+            <label>Password</label>
+            <input type="password" name="password"><br><br>
+            <div id="buttonContainer">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 
     
 </body>

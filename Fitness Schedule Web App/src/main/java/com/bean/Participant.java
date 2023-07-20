@@ -62,4 +62,13 @@ public class Participant
 	{
 		this.email = email;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "Participant [userId=" + userId + ", lastName=" + lastName + ", firstName=" + firstName + ", password="
+				+ password + ", email=" + email + "]";
+	}
+	
+	
 }

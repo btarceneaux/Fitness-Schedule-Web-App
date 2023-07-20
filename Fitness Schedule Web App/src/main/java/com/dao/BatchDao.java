@@ -60,7 +60,6 @@ public class BatchDao
 		try
 		{
 			Connection connection = DBResource.createConnection();	
-			System.out.println("Connection created.");
 			
 			String sql = 
 					"SELECT "
@@ -96,14 +95,13 @@ public class BatchDao
 	}
 	
 	
-	public List<Batch> getAllBatches()
+	public static List<Batch> getAllBatches()
 	{
 		List<Batch> batchList = new ArrayList<Batch>();
 		
 		try
 		{	
 			Connection connection = DBResource.createConnection();
-			System.out.println("Connection created.");
 			
 			PreparedStatement psmt = connection.prepareStatement(
 					"SELECT "
@@ -144,7 +142,6 @@ public class BatchDao
 		try
 		{	
 			Connection connection = DBResource.createConnection();
-			System.out.println("Connection created.");
 			
 			String day = batch.getBatchDay().toString();
 			String sql = "INSERT INTO batch VALUES(null, ?, ?);";
@@ -179,7 +176,6 @@ public class BatchDao
 		try
 		{	
 			Connection connection = DBResource.createConnection();
-			System.out.println("Connection created.");
 			
 			String sql = "UPDATE batch SET "
 					+ "batch_day = ?, "
@@ -213,7 +209,6 @@ public class BatchDao
 		try
 		{	
 			Connection connection = DBResource.createConnection();
-			System.out.println("Connection created.");
 			
 			String sql = "DELETE FROM batch WHERE batch_id = ?";
 			PreparedStatement psmt = connection.prepareStatement(sql);

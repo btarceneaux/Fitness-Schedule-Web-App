@@ -1,11 +1,12 @@
 package com.controller;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import com.bean.Participant;
+import com.service.ParticipantService;
 
 /**
  * Servlet implementation class ParticipantController
@@ -13,9 +14,8 @@ import java.io.IOException;
 public class ParticipantController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    ParticipantService service = new ParticipantService();
+	
     public ParticipantController() {
         super();
         // TODO Auto-generated constructor stub
@@ -33,8 +33,31 @@ public class ParticipantController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String email = request.getParameter("emailAddress");
+		String password = request.getParameter("password");
+		
+		Participant participant = new Participant();
+		participant.setFirstName(firstName);
+		participant.setLastName(lastName);
+		participant.setEmail(email);
+		participant.setPassword(password);
+		
+		int result = service.createParticipant(participant);
+		
+		String message = "";
+		if(result == 1)
+		{
+			System.out.println("Participant created successfully");
+			message = "Participant created successfully";
+		}
+		else
+		{
+			System.out.println("Something went wrong! Please try again!");
+			message = "Something went wrong! Please try again!";
+		}
+		
 	}
 
 	/**

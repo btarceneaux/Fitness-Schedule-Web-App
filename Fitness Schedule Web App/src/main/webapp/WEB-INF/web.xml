@@ -20,6 +20,7 @@
     <url-pattern>/BatchController</url-pattern>
     <url-pattern>/addBatch</url-pattern>
     <url-pattern>/updateBatch</url-pattern>
+    <url-pattern>/updateExistingBatch</url-pattern>
     <url-pattern>/deleteBatch</url-pattern>
     <url-pattern>/getBatch</url-pattern>
   </servlet-mapping>
