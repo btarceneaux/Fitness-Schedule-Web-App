@@ -68,8 +68,6 @@ public class BatchController extends HttpServlet {
 		String time = request.getParameter("time");
 		String action = request.getServletPath();
 		int hour = 0;
-		Time scheduleTime = new Time(hour, 0, 0);
-		PrintWriter pw = response.getWriter();
 		
 		String[] stringarray = time.split(":");
 		if(stringarray[1].equals("00am") || (stringarray[0].equals("12") && stringarray[1].equals("00pm")))
@@ -81,11 +79,14 @@ public class BatchController extends HttpServlet {
 			hour = Integer.parseInt(stringarray[0]) + 12;
 		}
 		
+		Time scheduleTime = new Time(hour, 0, 0);
+		PrintWriter pw = response.getWriter();
+		
 		switch (action)
 		{
-		case "updateExistingBatch":
-			String batchId = request.getParameter("id");
-			int myBatchId = Integer.parseInt(batchId);
+		case "/updateExistingBatch":
+			String id = request.getParameter("id");
+			int myBatchId = Integer.parseInt(id);
 			
 			Batch updatedBatch = new Batch();
 			updatedBatch.setBatchDay(day);

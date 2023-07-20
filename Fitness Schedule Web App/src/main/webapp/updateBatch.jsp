@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Update Batch</title>
+<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <%
@@ -14,11 +15,21 @@
         int myBatchId = (int)obj;
         request.setAttribute("myBatchId", myBatchId);
     %>
+    <div>
+        <nav>
+            <ul><a href="index.html">Home</a></ul>
+            <ul><a href="addBatch.html">Add Batch</a></ul>
+            <ul><a href="addParticipant.html">Add Participant</a></ul>
+            <ul><a href="batches.jsp">View/Edit Batches</a></ul>
+            <ul><a href="participants.jsp">View/Edit Participants</a></ul>
+            <ul><a href="batchParticipants.jsp">View/Edit Batch Participants</a></ul>
+        </nav>
+    </div>
     <h2>Update Batch</h2>
-    <div class="add">
-        <form action="updateExistingBatch" method="post">
-            <b>Batch ID</b><br>
-            <input type="text" value="<c:out value='${myBatchId}'/>" readonly><br>
+    <div class="updateBatch">
+        <form action="updateExistingBatch?id=<c:out value='${myBatchId}'/>" method="post">
+            <b>Batch ID</b>
+            <input type="text" id=staticId value="<c:out value='${myBatchId}'/>" readonly><br><br>
              <b>Please Select A Day : </b>
             <select name="day" id="day">
                 <option value="Sunday" class="optionDay">Sunday</option>

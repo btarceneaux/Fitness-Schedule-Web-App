@@ -19,11 +19,9 @@
             <ul><a href="index.html">Home</a></ul>
             <ul><a href="addBatch.html">Add Batch</a></ul>
             <ul><a href="addParticipant.html">Add Participant</a></ul>
-            <ul><a href="updateBatch.html">Update Batch</a></ul>
-            <ul><a href="updateParticipant.html">Update Participant</a></ul>
-            <ul><a href="batches.jsp">View Batches</a></ul>
-            <ul><a href="participants.jsp">View Participants</a></ul>
-            <ul><a href="batchParticipants.jsp">View Batch Participants</a></ul>
+            <ul><a href="batches.jsp">View/Edit Batches</a></ul>
+            <ul><a href="participants.jsp">View/Edit Participants</a></ul>
+            <ul><a href="batchParticipants.jsp">View/Edit Batch Participants</a></ul>
         </nav>
     </div>
     <%

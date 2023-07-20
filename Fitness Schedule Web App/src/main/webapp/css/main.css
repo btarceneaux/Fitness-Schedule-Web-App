@@ -47,6 +47,29 @@ nav a:hover
     margin: auto;
 }
 
+.updateBatch
+{
+    padding: 5px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-radius: 5px;
+    font-size: large;
+    font-weight: bold;
+    text-align:justify;
+    opacity: 95%;
+    width: 300px;
+    height:160px;
+    background-color: steelblue;
+    margin: auto;
+}
+
+.updateBatch b
+{
+    padding-left: 15px;
+    color: white;
+    padding-bottom: 5px;
+}
+
 .addParticipant
 {
     padding: 5px;
@@ -109,6 +132,11 @@ nav a:hover
     background-color: white;
     display: block;
     margin: auto;
+}
+
+#staticId
+{
+    size: 5;
 }
 
 #day
