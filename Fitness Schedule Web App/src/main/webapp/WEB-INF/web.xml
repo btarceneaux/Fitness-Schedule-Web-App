@@ -34,6 +34,7 @@
     <servlet-name>ParticipantController</servlet-name>
     <url-pattern>/ParticipantController</url-pattern>
     <url-pattern>/addParticipant</url-pattern>
+    <url-pattern>/updateExistingParticipant</url-pattern>
     <url-pattern>/updateParticipant</url-pattern>
     <url-pattern>/getParticipant</url-pattern>
     <url-pattern>/deleteParticipant</url-pattern>

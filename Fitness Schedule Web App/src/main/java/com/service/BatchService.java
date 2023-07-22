@@ -11,7 +11,7 @@ public class BatchService
 	
 	public List<Batch> getAllBatches()
 	{
-		return dao.getAllBatches();
+		return BatchDao.getAllBatches();
 	}
 	
 	public int createBatch(Batch batch)

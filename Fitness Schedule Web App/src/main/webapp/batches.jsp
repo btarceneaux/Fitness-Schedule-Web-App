@@ -26,7 +26,7 @@
     </div>
     <%
         List<Batch> batchList = BatchDao.getAllBatches(); 
-        request.setAttribute("batchList",batchList);  
+        request.setAttribute("batchList",batchList); 
     %>
     <h2>BATCH JSP PAGE</h2>
         <table border=1 solid>

@@ -16,6 +16,49 @@ public class ParticipantDao
 	String password = System.getenv("DBPW");
 	String url = System.getenv("BASEURL") + "fitness_schedule";
 	
+	public static Participant getParticipantById(int id)
+	{
+		Participant myParticipant = new Participant();
+		
+		try
+		{
+			Connection connection = DBResource.createConnection();
+			
+			String sql = 
+					"SELECT "
+					+ "user_id, "
+					+ "last_name, "
+					+ "first_name, "
+					+ "email, "
+					+ "password "
+					+ "FROM participant "
+					+ "WHERE user_id = ?;";
+			
+			PreparedStatement psmt = connection.prepareStatement(sql);
+			psmt.setInt(1, id);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next())
+			{
+				myParticipant.setUserId(rs.getInt("user_id"));
+				myParticipant.setLastName(rs.getString("last_name"));
+				myParticipant.setFirstName(rs.getString("first_name"));
+				myParticipant.setEmail(rs.getString("email"));
+				myParticipant.setPassword(rs.getString("password"));
+			}
+			
+			connection.close();
+		} 
+		catch (Exception e)
+		{
+			System.out.println("An error has occured : " + e);
+		}
+		
+		return myParticipant;
+		
+	}
+	
 	public Participant getParticipantByEmailAddress(String emailAddress)
 	{
 		Participant myParticipant = new Participant();
@@ -23,8 +66,6 @@ public class ParticipantDao
 		try
 		{
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
-			System.out.println("Connection created.");
 			
 			String sql = 
 					"SELECT "
@@ -62,15 +103,13 @@ public class ParticipantDao
 	}
 	
 	
-	public List<Participant> getAllParticipants()
+	public static List<Participant> getAllParticipants()
 	{
 		List<Participant> participantList = new ArrayList<Participant>();
 		
 		try
 		{
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
-			System.out.println("Connection created.");
 			
 			PreparedStatement psmt = connection.prepareStatement(
 					"SELECT "
@@ -95,9 +134,9 @@ public class ParticipantDao
 				participant.setUserId(rs.getInt("user_id"));
 				
 				participantList.add(participant);
-				
-				connection.close();
 			}
+			
+			connection.close();
 		} 
 		catch (Exception e)
 		{
@@ -116,8 +155,6 @@ public class ParticipantDao
 		try
 		{
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
-			System.out.println("Connection created.");
 			
 			String sql = "INSERT INTO participant VALUES(null, ?, ?, ?, ?)";
 			PreparedStatement psmt = connection.prepareStatement(sql);
@@ -150,8 +187,6 @@ public class ParticipantDao
 		try
 		{
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
-			System.out.println("Connection created.");
 			
 			String sql = "UPDATE participant SET "
 					+ "last_name = ?, "
@@ -189,8 +224,6 @@ public class ParticipantDao
 		try
 		{
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
-			System.out.println("Connection created.");
 			
 			String sql = "DELETE FROM participant WHERE user_id = ?";
 			PreparedStatement psmt = connection.prepareStatement(sql);

@@ -97,11 +97,11 @@ public class BatchController extends HttpServlet {
 			
 			if(updateResult == 1)
 			{
-				System.out.println("The batch was successfully created");
+				System.out.println("The batch was successfully updated");
 			}
 			else
 			{
-				System.out.println("The batch was not created");
+				System.out.println("The batch was not updated");
 			}
 			
 			RequestDispatcher upeBatch = request.getRequestDispatcher("batches.jsp");
@@ -113,9 +113,7 @@ public class BatchController extends HttpServlet {
 			myBatch.setBatchDay(day);
 			myBatch.setBatchTime(scheduleTime);
 			
-			int result = batchService.createBatch(myBatch);
-			
-			RequestDispatcher rdUser = request.getRequestDispatcher("index.html");
+			int result = batchService.createBatch(myBatch);			
 			
 			if(result == 1)
 			{
@@ -123,11 +121,11 @@ public class BatchController extends HttpServlet {
 			}
 			else
 			{
-				pw.println("The batch was not created. Please try again.");
+				pw.println("The batch was not created. Please try again.");	
 			}
 			
 //			rdUser.include(request, response);
-			response.sendRedirect("index.html");
+			response.sendRedirect("batches.jsp");
 			
 			break;
 		}		

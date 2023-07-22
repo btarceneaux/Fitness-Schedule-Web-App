@@ -10,7 +10,7 @@ public class ParticipantService
 	
 	public List<Participant> getAllParticipants()
 	{
-		return dao.getAllParticipants();
+		return ParticipantDao.getAllParticipants();
 	}
 	
 	public int createParticipant(Participant participant)
@@ -20,9 +20,9 @@ public class ParticipantService
 		return result;
 	}
 	
-	public int deleteParticipant(Participant participant)
+	public int deleteParticipant(int participantId)
 	{
-		int result = dao.deleteParticipant(participant.getUserId());
+		int result = dao.deleteParticipant(participantId);
 		
 		return result;
 	}
