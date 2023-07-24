@@ -1,6 +1,8 @@
 <%@page import="com.dao.ParticipantDao"%>
+<%@page import="com.dao.BatchDao"%>
 <%@page import="java.util.List"%>
 <%@page import="com.bean.Participant"%>
+<%@page import="com.bean.Batch"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -19,12 +21,13 @@
             <ul><a href="addParticipant.html">Add Participant</a></ul>
             <ul><a href="batches.jsp">View/Edit Batches</a></ul>
             <ul><a href="participants.jsp">View/Edit Participants</a></ul>
-            <ul><a href="batchParticipants.jsp">View/Edit Batch Participants</a></ul>
         </nav>
     </div>
     <%
         List<Participant> participantList = ParticipantDao.getAllParticipants(); 
+        List<Batch> batchList = BatchDao.getAllBatches();
         request.setAttribute("participantList",participantList); 
+        request.setAttribute("batchList",batchList); 
     %>
     <h2>PARTICIPANT JSP PAGE</h2>
     <table border=1 solid>
@@ -35,12 +38,12 @@
             <th>Email Address</th>
             <th>Action</th>
         </tr>
-        <c:forEach var="participant" items="${participantList}"> 
+        <c:forEach var="participant" items="${participantList}">
         <tr>
             <td>${participant.getUserId()}</td>
             <td>${participant.getLastName()}</td>
             <td>${participant.getFirstName()}</td>
-            <td>${participant.getEmail()}</td>
+            <td>${participant.getEmail()}</td>          
             <td>
                 <a href="deleteParticipant?id=<c:out value='${participant.getUserId()}'/>">Delete</a> or 
                 <a href="updateParticipant?id=<c:out value='${participant.getUserId()}'/>">Update</a>

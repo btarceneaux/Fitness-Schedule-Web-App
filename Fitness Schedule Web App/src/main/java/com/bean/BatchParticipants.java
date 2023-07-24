@@ -5,6 +5,8 @@ public class BatchParticipants
 	private int id;
 	private int batchId; 
 	private int participantId;
+	private String participantLastName;
+	private String participantFirstName;
 	
 	public BatchParticipants()
 	{
@@ -40,4 +42,26 @@ public class BatchParticipants
 	{
 		this.participantId = participantId;
 	}
+
+	public String getParticipantLastName()
+	{
+		return participantLastName;
+	}
+
+	public void setParticipantLastName(String participantLastName)
+	{
+		this.participantLastName = participantLastName;
+	}
+
+	public String getParticipantFirstName()
+	{
+		return participantFirstName;
+	}
+
+	public void setParticipantFirstName(String participantFirstName)
+	{
+		this.participantFirstName = participantFirstName;
+	}
+	
+	
 }

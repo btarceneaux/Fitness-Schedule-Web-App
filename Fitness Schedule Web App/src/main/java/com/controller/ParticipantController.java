@@ -8,7 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+
+import com.bean.BatchParticipants;
 import com.bean.Participant;
+import com.service.BatchParticipantsService;
 import com.service.ParticipantService;
 
 /**
@@ -18,6 +21,7 @@ public class ParticipantController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     ParticipantService service = new ParticipantService();
+    BatchParticipantsService bpService = new BatchParticipantsService();
 	
     public ParticipantController() {
         super();
@@ -65,6 +69,7 @@ public class ParticipantController extends HttpServlet {
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("emailAddress");
 		String password = request.getParameter("password");
+		String batchIdString = request.getParameter("batchId");
 		
 		String action = request.getServletPath();
 		
@@ -74,18 +79,36 @@ public class ParticipantController extends HttpServlet {
 		participant.setEmail(email);
 		participant.setPassword(password);
 		
+		
 		switch (action)
 		{
 		case "/updateExistingParticipant":
+			String[] stringArray = batchIdString.split(" ");
+			String batchId = stringArray[0];
+			
 			int id = Integer.parseInt(request.getParameter("id"));
 			participant.setUserId(id);
 			
+			BatchParticipants myBatchParticipant = new BatchParticipants();
+			myBatchParticipant.setBatchId(Integer.parseInt(batchId));
+			myBatchParticipant.setParticipantId(id);
+			myBatchParticipant.setParticipantFirstName(firstName);
+			myBatchParticipant.setParticipantLastName(lastName);
+			
 			int updateResult = service.updateParticipant(participant);
+			int addToBatchResult = bpService.createBatchParticipant(myBatchParticipant);
 			
 			if(updateResult == 1)
 			{
 				System.out.println("Participant updated successfully");
-				
+				if (addToBatchResult == 1)
+				{
+					System.out.println("Participant added to batch");
+				}
+				else
+				{
+					System.out.println("Participant not added to batch.");
+				}
 				response.sendRedirect("participants.jsp");
 			}
 			else

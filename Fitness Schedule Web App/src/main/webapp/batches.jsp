@@ -21,7 +21,6 @@
             <ul><a href="addParticipant.html">Add Participant</a></ul>
             <ul><a href="batches.jsp">View/Edit Batches</a></ul>
             <ul><a href="participants.jsp">View/Edit Participants</a></ul>
-            <ul><a href="batchParticipants.jsp">View/Edit Batch Participants</a></ul>
         </nav>
     </div>
     <%
@@ -43,7 +42,8 @@
                 <td>${batch.getBatchTime()}</td>
                 <td>
                     <a href="deleteBatch?id=<c:out value='${batch.getBatchId()}'/>">Delete</a> or 
-                    <a href="updateBatch?id=<c:out value='${batch.getBatchId()}'/>">Update</a>
+                    <a href="updateBatch?id=<c:out value='${batch.getBatchId()}'/>">Update</a> or
+                    <a href="batchParticipants.jsp?id=<c:out value='${batch.getBatchId()}'/>">View Batch Participants</a>
                 </td>
             </tr>
             </c:forEach>

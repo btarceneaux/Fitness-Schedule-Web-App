@@ -17,22 +17,24 @@ public class BatchParticipantDao
 	String password = System.getenv("DBPW");
 	String url = System.getenv("BASEURL") + "fitness_schedule";
 	
-	public List<BatchParticipants> getBatchParticipant(int batchParticipantsId)
+	public static List<BatchParticipants> getBatchParticipant(int batchParticipantsId)
 	{
 		List<BatchParticipants> batchParticipantList = new ArrayList<BatchParticipants>();
 		
 		try
 		{	
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
+			
 			System.out.println("Connection created.");
 			
 			String sql = "SELECT "
-					+    "id "
-					+    "batch_id "
-					+    "participant_id "
+					+    "id, "
+					+    "batch_id, "
+					+    "participant_id, "
+					+    "participant_first_name, "
+					+    "participant_last_name "
 					+    "FROM batch_participants "
-					+    "WHERE id = ?;";
+					+    "WHERE batch_id = ?;";
 			
 			PreparedStatement psmt = connection.prepareStatement(sql);
 			psmt.setInt(1, batchParticipantsId);
@@ -43,14 +45,13 @@ public class BatchParticipantDao
 			{
 				BatchParticipants myBatchParticipant = new BatchParticipants();
 				
-				while(rs.next())
-				{
-					myBatchParticipant.setId(rs.getInt("id"));
-					myBatchParticipant.setBatchId(rs.getInt("batch_id"));
-					myBatchParticipant.setParticipantId(rs.getInt("participant_id"));
-					
-					batchParticipantList.add(myBatchParticipant);
-				}
+				myBatchParticipant.setId(rs.getInt("id"));
+				myBatchParticipant.setBatchId(rs.getInt("batch_id"));
+				myBatchParticipant.setParticipantId(rs.getInt("participant_id"));
+				myBatchParticipant.setParticipantFirstName(rs.getString("participant_first_name"));
+				myBatchParticipant.setParticipantLastName(rs.getString("participant_last_name"));
+				
+				batchParticipantList.add(myBatchParticipant);
 			}
 			
 			connection.close();
@@ -71,7 +72,7 @@ public class BatchParticipantDao
 		try
 		{
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
+			
 			System.out.println("Connection created.");
 			
 			String sql = "SELECT "
@@ -105,23 +106,25 @@ public class BatchParticipantDao
 	}
 	
 	
-	public List<BatchParticipants> getAllBatchParticipants()
+	public static List<BatchParticipants> getAllBatchParticipants()
 	{
 		List<BatchParticipants> myBatchParticipantList = new ArrayList<BatchParticipants>();
 		
 		try
 		{
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
+			
 			System.out.println("Connection created.");
 			
 			PreparedStatement psmt = connection.prepareStatement(
-					"SELECT "
+					  "SELECT "
 					+ "id, "
 					+ "batch_id, "
-					+ "participant_id "
+					+ "participant_id,"
+					+ "participant_last_name,"
+					+ "participant_first_name "
 					+ "FROM batch_participants "
-					+ "ORDER BY batch_id;");
+					+ "ORDER BY participant_last_name, participant_first_name;");
 			
 			ResultSet rs = psmt.executeQuery();
 			
@@ -132,6 +135,8 @@ public class BatchParticipantDao
 				myBatchParticipant.setId(rs.getInt("id"));
 				myBatchParticipant.setId(rs.getInt("batch_id"));
 				myBatchParticipant.setId(rs.getInt("participant_id"));
+				myBatchParticipant.setParticipantLastName(rs.getString("participant_last_name"));
+				myBatchParticipant.setParticipantFirstName(rs.getString("participant_first_name"));
 				
 				myBatchParticipantList.add(myBatchParticipant);
 			}
@@ -153,14 +158,16 @@ public class BatchParticipantDao
 		try
 		{
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
+			
 			System.out.println("Connection created.");
 			
-			String sql = "INSERT INTO batch_participants VALUES(null, ?, ?)";
+			String sql = "INSERT INTO batch_participants VALUES(null, ?, ?, ?, ?)";
 			PreparedStatement psmt = connection.prepareStatement(sql);
 			
 			psmt.setInt(1, batchParticipant.getBatchId());
 			psmt.setInt(2, batchParticipant.getParticipantId());
+			psmt.setString(3, batchParticipant.getParticipantFirstName());
+			psmt.setString(4, batchParticipant.getParticipantLastName());
 			
 			result = psmt.executeUpdate();
 			
@@ -185,7 +192,7 @@ public class BatchParticipantDao
 		try
 		{
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
+			
 			System.out.println("Connection created.");
 			
 			String sql = "UPDATE batch_participants SET "
@@ -223,7 +230,7 @@ public class BatchParticipantDao
 		try
 		{
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
+			
 			System.out.println("Connection created.");
 			
 			String sql = "DELETE FROM batch_participants WHERE id = ?;";
@@ -255,7 +262,7 @@ public class BatchParticipantDao
 		try
 		{
 			Connection connection = DBResource.createConnection();
-			connection = DriverManager.getConnection(url, username, password);
+			
 			System.out.println("Connection created.");
 			
 			String sql = "DELETE FROM batch_participants WHERE participant_id = ?;";

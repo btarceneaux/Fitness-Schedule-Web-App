@@ -1,0 +1,60 @@
+h2
+{
+    text-align: center;
+    color:steelblue;
+}
+
+nav
+{
+    background-color: steelblue;  
+    display: flex;
+    justify-content: space-evenly;
+    font-size: large;
+}
+
+nav a
+{
+    color: white;
+    /* font-size: large; */
+    text-decoration: none;
+}
+
+nav a:hover
+{
+    font-weight: bold;
+    /* background-color:white; */
+}
+
+#p1
+{
+    color:steelblue;
+    text-align: center;
+}
+
+#batchDisplay table
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    color: darkcyan;
+    text-align: center;
+}
+
+#batchDisplay table th
+{
+    background-color: steelblue;
+    color:white;
+    border-color: steelblue;
+    font-size: large;
+    font-weight: bold;
+}
+
+#batchDisplay table td
+{
+    font-weight: bold;
+}
+
+#batchDisplay
+{
+    text-align: center;
+}
